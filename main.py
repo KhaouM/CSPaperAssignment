@@ -156,7 +156,29 @@ with open(file_path, 'r') as file:
 
         print(P)
         print(frac_comp)
-            
+
+y_values = np.array(P)
+
+x_values = np.array(frac_comp)
+
+# Get the sorted indices for x_values
+sorted_indices = np.argsort(x_values)
+
+# Sort x_values and corresponding y_values based on the sorted indices
+x_values_sorted = x_values[sorted_indices]
+y_values_sorted = y_values[:, sorted_indices]
+
+# Create subplots for each array
+fig, axs = plt.subplots(nrows=len(y_values), ncols=1, figsize=(8, 6 * len(y_values)))
+
+for i in range(len(y_values_sorted)):
+    axs[i].plot(x_values_sorted, y_values_sorted[i], marker='o', label=f'Array {i+1}')
+    axs[i].set_xlabel('X-axis')
+    axs[i].set_ylabel('Y-axis')
+    axs[i].legend()
+
+plt.tight_layout()
+plt.show()
 
 
 
